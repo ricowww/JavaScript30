@@ -38,11 +38,49 @@
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
+
+  //my solution
+  
+  //array.filter() passes the array's elements inside, so we make a function to catch the elements and then pass them into a function that returns true or false
+    //passes in all elements of array
+    //if function returns true, element is kept
+    //if not, element is discarded
+
+  const inventor1500s = inventors.filter(
+    //function to return true for elements's years inside 1500 to 1599
+    function (elementInv) { //elementInv is the function-declared variable for the elements being automatically passed
+      if (elementInv.year >= 1500 && elementInv.year < 1600) {
+        return true;
+      }
+    }
+  ); 
+  
+  console.table(inventor1500s)//outputs the table in the console
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
+    //my solution
+    //The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.
+      //passes in all elements of array
+      //result of the function is the new element
+      //only the simple arrow function notation works for some reason
+      //semi arrow with return also works
+
+    const firstLastNamesv6 = inventors.map( elementInv => `${elementInv.first} ${elementInv.last}`);
+    const firstLastNamesv8 = inventors.map( (elementInv) => {return `${elementInv.first} ${elementInv.last}`});
+
+
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    //mysolution
+    //function(a, b){return a - b}
+    //When the sort() function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.
+      //always compares two elements, a and b
+      //if result of function used for ordering, from smallest value to biggest
+      //this function prefers an enclosed arrow function with return
+
+    const sortByBirthv5 = inventors.sort( (elementInvA, elementInvB) => { return (elementInvA.year - elementInvB.year)});
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
