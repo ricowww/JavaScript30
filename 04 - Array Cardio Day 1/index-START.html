@@ -35,13 +35,13 @@
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
     
+/////////////////////////////////////////////////////////////////////////////////////
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
 
   //my solution
-  
-  //array.filter() passes the array's elements inside, so we make a function to catch the elements and then pass them into a function that returns true or false
+    //array.filter() passes the array's elements inside, so we make a function to catch the elements and then pass them into a function that returns true or false
     //passes in all elements of array
     //if function returns true, element is kept
     //if not, element is discarded
@@ -56,7 +56,7 @@
   ); 
   
   console.table(inventor1500s)//outputs the table in the console
-
+/////////////////////////////////////////////////////////////////////////////////////
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
 
@@ -70,9 +70,10 @@
     const firstLastNamesv6 = inventors.map( elementInv => `${elementInv.first} ${elementInv.last}`);
     const firstLastNamesv8 = inventors.map( (elementInv) => {return `${elementInv.first} ${elementInv.last}`});
 
-
+/////////////////////////////////////////////////////////////////////////////////////
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
     //mysolution
     //function(a, b){return a - b}
     //When the sort() function compares two values, it sends the values to the compare function, and sorts the values according to the returned (negative, zero, positive) value.
@@ -80,23 +81,94 @@
       //if result of function used for ordering, from smallest value to biggest
       //this function prefers an enclosed arrow function with return
 
-    const sortByBirthv5 = inventors.sort( (elementInvA, elementInvB) => { return (elementInvA.year - elementInvB.year)});
+    const sortByBirthv5 = inventors.sort((elementInvA, elementInvB) => {return (elementInvA.year - elementInvB.year)});
 
+/////////////////////////////////////////////////////////////////////////////////////
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
-    // 5. Sort the inventors by years lived
+    //mysolution
+    //const array1 = [1, 2, 3, 4];
+    //const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    //// 1 + 2 + 3 + 4
+    //console.log(array1.reduce(reducer));
+    //// expected output: 10
+    //more like, it is CurrentRunningTotal and Element
+    //the () => {return ..statement..} works best all in all
+    //you need a reduce(() => {return ...},0) you need ZERO for some weird reason
 
+  
+
+    const sumLifev8 = inventors.reduce( (previousValue, inventor) => {return previousValue + (inventor.passed - inventor.year)}, 0);
+
+/////////////////////////////////////////////////////////////////////////////////////
+    // 5. Sort the inventors by years lived
+    const sortByYears = inventors.sort( (elementInvA, elementInvB) => { return (elementInvA.passed - elementInvA.year) - (elementInvB.passed - elementInvB.year)});
+/////////////////////////////////////////////////////////////////////////////////////
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    const category = document.querySelector('.mw-category'); //grab whole div containing all boulevards
+    const links = Array.from(category.querySelectorAll('a')); //extract only node childs which contain boulevard text, make an array from them
+    const de = links
+      .map(link => link.textContent) //grab only the text in <a> child nodes
+      .filter(streetname => streetname.includes('de')); //filter by using .includes() argument
+
+    de;
+    //be careful with CamelCase, can break your code
+
+/////////////////////////////////////////////////////////////////////////////////////
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    const sortByLastNamev2 = people.sort();
+
+    // Sort the people alphabetically by first name
+
+    const sortByFirstNamev6 = people.sort(
+      function (currentp, nextp) {
+        const [curLast, curFirst] = currentp.split(', ');
+        const [nxLast, nxFirst] = nextp.split(', ');
+        return curFirst > nxFirst ? 1: -1; //I dont know why this notation is only accepted
+      }
+      );
+
+
+
+
+
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    //running total is an array
+    //when next item isnt in total, add it to array
+    //use .push()
+
+    //meant to get all unique types
+    const noRedundancyv3 = []; //storage const
+    data.forEach((elem) => { //iterate thru all alements
+      if (noRedundancyv3.includes(elem)){} //if element already present, blank
+        else {noRedundancyv3.push(elem)}; //if element not yet, add to storage
+        return noRedundancyv3;
+
+    });
+
+    const transpoCount = data.reduce(function(obj, item){
+      if(!obj[item]){//if current count doesnt have item
+        obj[item] = 0; //set item to zero?
+      } obj[item]++;; //if object is already present, add+1
+      return obj; //const equals object
+    }, {}
+    );
+
+
+
+
+
+
 
   </script>
 </body>
