@@ -26,15 +26,71 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
+    //const even = (element) => element % 2 === 0;
+
+    const one19 = people.some(
+      (element) => (2022 - element.year) >= 19
+    );
+
     // Array.prototype.every() // is everyone 19 or older?
+    //ages.every(checkAge)
+    //function checkAge(age) {return age > 18;}
+
+    function everyone19fn(elem){//declare function meant to get in elements, returns true or false
+      ((new Date().getFullYear()) - elem.year) >= 19;
+    };
+
+    const everyone19 = people.every(everyone19fn);//check if all are older or equal to 19
+
+    everyone19; //call constant
+
+
+
 
     // Array.prototype.find()
+    //const array1 = [5, 12, 8, 130, 44];
+    //const found = array1.find(element => element > 10);
+    //console.log(found);
+    // expected output: 12
+
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    function findById_fv2(elem){if (elem.id == 823423){return true}};//function to see if ID is matched
+    const findById_rv2 = comments.find(findById_fv2); //call function
+    findById_rv2;
+
+    const findByIdv2 = comments.find(elem => elem.id == 823423);
+
     // Array.prototype.findIndex()
+    //const array1 = [5, 12, 8, 130, 44];
+    //
+    //const isLargeNumber = (element) => element > 13;
+    //
+    //console.log(array1.findIndex(isLargeNumber));
+    // expected output: 3
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    function remById(elem) {
+      elem.id === 823423;
+    };
+    const resultIndex = comments.findIndex(remById);
+    const resultFinal = comments.splice(resultIndex,1);
+    resultFinal;89
+
+
+    const remByIdv2 = comments.findIndex(elem => elem.id === 823423);
+    remByIdv2;
+    comments.splice(remByIdv2,1); //splices directly modifies the array
+    comments;
+
+    
+
+
+
+
+
 
   </script>
 </body>
